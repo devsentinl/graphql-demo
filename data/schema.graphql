@@ -1,0 +1,53 @@
+type Pedido {
+  producto: String
+  precio: Int
+}
+type Cliente {
+  id: ID
+  nombre: String
+  apellido: String
+  empresa: String
+  tipo: TipoCliente
+  pedidos: [Pedido]
+  emails: [Email]
+}
+type Email {
+  email: String
+}
+input PedidoInput {
+  producto: String
+  precio: Int
+}
+input ClienteInput {
+  id: ID
+  nombre: String!
+  apellido: String!
+  empresa: String!
+  tipo: TipoCliente!
+  pedidos: [PedidoInput]
+  emails: [EmailInput]
+}
+input EmailInput {
+  email: String
+}
+type Query {
+  #nombre del Resolver, Input con datos y valor que retorna
+  getClientes(limite:Int):[Cliente]
+  getCliente(id: ID): Cliente
+}
+"""
+   crear nuevos clientes
+"""
+type Mutation {
+  """
+     crear nuevos clientes
+  """
+  crearCliente(input: ClienteInput): Cliente
+}
+"""
+   Categoria del cliente
+"""
+enum TipoCliente {
+  BASICO
+  PREMIUM
+}
